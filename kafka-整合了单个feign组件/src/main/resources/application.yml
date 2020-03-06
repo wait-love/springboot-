@@ -1,0 +1,25 @@
+server:
+  port: 8078
+
+spring:
+  datasource:
+      url: jdbc:mysql://localhost:3306/learn?serverTimezone=UTC
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+  kafka:
+    bootstrap-server: 127.0.0.1:9092   #z指定kafka Server的地址，集群配多个，中间，逗号隔开
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: default_consumer_group #群组ID
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      missing-topics-fatal: false
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
