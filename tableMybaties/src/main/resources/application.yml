@@ -1,0 +1,94 @@
+server:
+  port: 9089
+
+spring:
+  datasource:
+    master:
+      # class name
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #springboot默认的连接池
+      type: com.alibaba.druid.pool.DruidDataSource
+      #规定写jdbcUrl路径
+      url: jdbc:mysql://127.0.0.1:3306/springboot?useSSL=false&serverTimezone=UTC
+      username: root
+      password: 123456
+      initial-size: 5 #初始化的个数
+      min-idle: 5 #空闲时的最小个数
+      max-idle: 20
+      max-wait: 60000 #配置获取连接等待超时时间
+      pool-prepared-statements: false #是否启用PScach  对于oracle数据库
+      max-open-prepared-statements: 0 # 要想启用PScach，这个属性值必须大于0
+      time-between-evition-runs-mills: 60000 #配置间隔多久进行一次检测，检测需要关闭的时间
+      min-evictable-idle-time-mills: 30000 #连接池中最小与最大的生存时间
+      max-evictable-idle-time-mills: 90000 #连接池中最大的生存时间
+      test-while-idle: true #申请链接的时候监测，如果空闲时间大于timeBeween,执行校验
+      test-on-return: true # 归还链接时，执行校验sql
+      test-on-baorrow: true  #申请链接时执行校验sql
+      validation-query: SELECT 1
+      filters: stat #stat用于统计  wall是用来防火墙
+    slave:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      jdbcUrl: jdbc:mysql://127.0.0.1:3306/learn?useSSL=false&serverTimezone=UTC
+      username: root
+      password: 123456
+      initial-size: 5 #初始化的个数
+      min-idle: 5 #空闲时的最小个数
+      max-idle: 20
+      max-wait: 60000 #配置获取连接等待超时时间
+      pool-prepared-statements: false #是否启用PScach  对于oracle数据库
+      max-open-prepared-statements: 0 # 要想启用PScach，这个属性值必须大于0
+      time-between-evition-runs-mills: 60000 #配置间隔多久进行一次检测，检测需要关闭的时间
+      min-evictable-idle-time-mills: 30000 #连接池中最小与最大的生存时间
+      max-evictable-idle-time-mills: 90000 #连接池中最大的生存时间
+      test-while-idle: true #申请链接的时候监测，如果空闲时间大于timeBeween,执行校验
+      test-on-return: true # 归还链接时，执行校验sql
+      test-on-borrow: true  #申请链接时执行校验sql
+      validation-query: SELECT 1
+      filters: stat  #stat用于统计  wall是用来防火墙
+
+  #rabbitmq中的配置部分
+  appliaction:
+    name: springboot
+
+  #具体的是配置rabbitmq信息
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+
+    #确认消息已发送到交换机
+    #确认消息已发送到队列（Queue)
+    publisher-returns: true
+    publisher-confirm-type: correlated
+
+  #redis中的配置部分
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    pool:
+      max-active: 200
+      max-wait: -1
+      max-idle: 10
+      min-idle: 0 #最小空闲数
+    timeout: 1000
+
+  #es数据库中的配置位置
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+
+
+
+# pagehelper
+pagehelper:
+  helperDialect: mysql  #支持mysql
+  reasonable: true      #合理化，小于0既查询第一页，大于就查询最后一页
+  supportMethodsArguments: true   #是否允许通过mapper接口传递参数
+  params: count=countSql    #总页数为countSql
+
+

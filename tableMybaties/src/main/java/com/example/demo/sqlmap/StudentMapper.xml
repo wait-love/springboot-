@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Student">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="student_age" jdbcType="INTEGER" property="studentAge" />
+    <result column="student_sex" jdbcType="INTEGER" property="studentSex" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.model.Student">
+    insert into student (id, student_id, student_name, 
+      student_age, student_sex)
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, 
+      #{studentAge,jdbcType=INTEGER}, #{studentSex,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, student_id, student_name, student_age, student_sex
+    from student
+  </select>
+
+  <!--查询出所有的数据并且按照id倒序来查询所有的数据-->
+  <select id="queryDatas" resultMap="BaseResultMap">
+    select  id , student_id, student_name, student_age, student_sex from student
+    order by id
+  </select>
+</mapper>
